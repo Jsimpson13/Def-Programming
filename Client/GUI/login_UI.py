@@ -1,5 +1,8 @@
+import sys
+sys.path.append('C:/Users/jsimp/OneDrive/Desktop/Def-Programming')
 import tkinter as tk
 from PIL import Image, ImageTk
+from Client.GUI.newusr_UI import NewUserUI
 
 class loginUI:
     def __init__(self):
@@ -26,7 +29,8 @@ class loginUI:
         self.pswdlabel = tk.Label(self.root, text="Password: ")
         self.usr = tk.Entry(self.root, width=20)
         self.pswd = tk.Entry(self.root, width=20, show="*")
-        self.signinbtn = tk.Button(self.root, text="Sign in", width=5)
+        self.signinbtn = tk.Button(self.root, text="Sign in", width=7)
+        self.newuserbtn=tk.Button(self.root,text="New User", width=7, command=self.open_new_user_page)
 
         # Image button
         self.logobutton = tk.Button(self.root, image=self.image_tk)  # Button with image
@@ -36,7 +40,8 @@ class loginUI:
         self.usr.pack()
         self.pswdlabel.pack()
         self.pswd.pack()
-        self.signinbtn.pack()
+        self.signinbtn.pack(side="left")
+        self.newuserbtn.pack(side="right")
         self.logobutton.pack(pady=10)
 
         # Bind the window resize event to the on_resize method
@@ -65,6 +70,9 @@ class loginUI:
 
         # Update the logo button with resized image
         self.logobutton.config(image=self.image_tk)
-
+    def open_new_user_page(self):
+        NewUserUI()
+    def sign_in(self):
+        return "print"
 # Run the UI
-loginUI()
+#loginUI()

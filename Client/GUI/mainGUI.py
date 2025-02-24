@@ -19,7 +19,7 @@ class mainGUI():
         self.teamSlogan=tk.Label(self.root, text="Skull and Bloom", fg="white", bg="black",font=("Times New Roman",20)).pack()
 
         # Image button
-        self.logobutton = tk.Button(self.root, image=self.image_tk)  # Button with image
+        self.logobutton = tk.Button(self.root, image=self.image_tk, bg="Black")  # Button with image
 
         self.logobutton.pack(pady=10)
         self.root.mainloop()
