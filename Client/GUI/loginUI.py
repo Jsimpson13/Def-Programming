@@ -1,7 +1,9 @@
 import tkinter as tk
+import sys
+sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
 #import Backend.loginPage as loginPage
 
-class loginUI:
+class LoginUI:
 
     def __init__(self):
         self.root=tk.Tk()
@@ -19,4 +21,5 @@ class loginUI:
         pswd.pack()
         signinbtn.pack()
         self.root.mainloop()
-loginUI()
+if __name__=="__main__":
+    app=LoginUI()

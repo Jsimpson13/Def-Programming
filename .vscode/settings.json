@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "./Client/Backend"
+        "./Client/Backend",
+        "./Client/GUI"
     ]
 }
