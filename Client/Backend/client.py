@@ -9,6 +9,7 @@ from Decrypt import Decrypt  # Import your Decrypt class
 from Encoding import Encoding  # Import your Encoding function or class
 
 class DiffieHellmanClient:
+    loggedin=False
     def __init__(self, host='127.0.0.1', port=12345):
         self.host = host
         self.port = port
@@ -72,6 +73,8 @@ class DiffieHellmanClient:
     def interactive_chat(self):
         """Allows the client to chat interactively with the server."""
         try:
+            if (client.loggedin==False):
+                client.loggin()
             while True:
                 message = input("Client: ")
                 if message.lower() == "exit":
@@ -88,6 +91,18 @@ class DiffieHellmanClient:
         """Closes the connection to the server."""
         self.client_socket.close()
         print("Disconnected from server.")
+
+    def loggin(self): 
+        user=input("Please Input Username: ")
+        while True: 
+            if (user=="John"):
+                #this needs to be changed to look through the user names of the db
+                psd=input("Please Input Password: ")
+                if (psd=="JohnDoe123"):
+                    self.loggedin=True
+                    break
+                else: print("Please put in valid input")
+        
 
 if __name__ == "__main__":
     client = DiffieHellmanClient()

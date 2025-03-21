@@ -1,26 +1,27 @@
 import sys
 import threading
+
 sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
-from Client.GUI.loginUI import LoginUI
-import server
+#from Client.GUI.login_UI import loginUI
+#from Client.GUI import mainGUI
+from server import DiffieHellmanServer
+from mainPage import mainPage
+from loginPage import loginPage
+
 
 def process_message(message):
     """Handles incoming messages and calls corresponding functions."""  
     if message=="exit":
         return exit_server()
-    if message=="main page":
-        return main_page()
-    if message=="login":
-        threading.Thread(target=LoginUI().run, daemon=True).start()
-        return "login"
+    if message=="main page":    
+            """threading.Thread(target=mainGUI().run, daemon=True).start()
+            return "main page"""
+            return mainPage.pageDisplay()
     else: return "no option"
 
 
 def exit_server():
     return 
-def main_page():
-    """Function triggered when client sends 'main page'."""
-    return "You are on the main page."
 
 def server_status():
     """Returns server status."""
@@ -28,7 +29,7 @@ def server_status():
 
 def mainServer():
     """Starts the server and forwards messages to `process_message`."""
-    Server = server.DiffieHellmanServer()
+    Server = DiffieHellmanServer()
     Server.start()
     Server.handle_messages(process_message)
 
