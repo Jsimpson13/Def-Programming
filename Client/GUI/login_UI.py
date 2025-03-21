@@ -3,6 +3,7 @@ sys.path.append('C:/Users/jsimp/OneDrive/Desktop/Def-Programming')
 import tkinter as tk
 from PIL import Image, ImageTk
 from Client.GUI.newusr_UI import NewUserUI
+from Client.GUI.mainGUI import mainGUI
 
 class loginUI:
     def __init__(self):
@@ -29,7 +30,7 @@ class loginUI:
         self.pswdlabel = tk.Label(self.root, text="Password: ")
         self.usr = tk.Entry(self.root, width=20)
         self.pswd = tk.Entry(self.root, width=20, show="*")
-        self.signinbtn = tk.Button(self.root, text="Sign in", width=7)
+        self.signinbtn = tk.Button(self.root, text="Sign in", width=7, command=self.sign_in)
         self.newuserbtn=tk.Button(self.root,text="New User", width=7, command=self.open_new_user_page)
 
         # Image button
@@ -73,6 +74,11 @@ class loginUI:
     def open_new_user_page(self):
         NewUserUI()
     def sign_in(self):
+        while True: 
+            if(self.usr.get()=="John" and self.pswd.get()=="JohnDoe123"):
+                mainGUI()
+                break
+            #else: pop up error menu 
         return "print"
 # Run the UI
 #loginUI()

@@ -21,6 +21,9 @@ class mainGUI():
         # Image button
         self.logobutton = tk.Button(self.root, image=self.image_tk, bg="Black")  # Button with image
 
+        # Text from the database
+       
+
         self.logobutton.pack(pady=10)
         self.root.mainloop()
 
