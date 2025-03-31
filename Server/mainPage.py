@@ -1,5 +1,5 @@
 import sys
-sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+#sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
 
 
 class mainPage:

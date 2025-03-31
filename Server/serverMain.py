@@ -1,7 +1,7 @@
 import sys
 import threading
 
-sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+#sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
 #from Client.GUI.login_UI import loginUI
 #from Client.GUI import mainGUI
 from server import DiffieHellmanServer

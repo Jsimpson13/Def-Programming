@@ -6,7 +6,9 @@ from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from cryptography.hazmat.primitives.hashes import SHA256
 from cryptography.hazmat.primitives import serialization
 from Decrypt import Decrypt  
-from Encoding import Encoding  
+from Encoding import Encoding
+from Server import Db
+  
 
 class DiffieHellmanServer:
     def __init__(self, host='127.0.0.1', port=12345):
@@ -19,6 +21,7 @@ class DiffieHellmanServer:
         self.running = True  
 
     def start(self):
+        Db.createDB()
         """Starts the server and waits for a client connection."""
         self.server_socket.bind((self.host, self.port))
         self.server_socket.listen(1)

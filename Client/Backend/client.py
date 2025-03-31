@@ -6,7 +6,8 @@ from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from cryptography.hazmat.primitives.hashes import SHA256
 from cryptography.hazmat.primitives import serialization
 from Decrypt import Decrypt  # Import your Decrypt class
-from Encoding import Encoding  # Import your Encoding function or class
+from Encoding import Encoding
+from Server.loginPage import loginPage  # Import your Encoding function or class
 
 class DiffieHellmanClient:
     loggedin=False
@@ -73,9 +74,7 @@ class DiffieHellmanClient:
     def interactive_chat(self):
         """Allows the client to chat interactively with the server."""
         try:
-            if (client.loggedin==False):
-                client.loggin()
-            while True:
+            while (loginPage.loggedin()==True):
                 message = input("Client: ")
                 if message.lower() == "exit":
                     self.send_message("exit")
@@ -92,7 +91,7 @@ class DiffieHellmanClient:
         self.client_socket.close()
         print("Disconnected from server.")
 
-    def loggin(self): 
+    """def loggin(self): 
         user=input("Please Input Username: ")
         while True: 
             if (user=="John"):
@@ -101,7 +100,7 @@ class DiffieHellmanClient:
                 if (psd=="JohnDoe123"):
                     self.loggedin=True
                     break
-                else: print("Please put in valid input")
+                else: print("Please put in valid input")"""
         
 
 if __name__ == "__main__":
