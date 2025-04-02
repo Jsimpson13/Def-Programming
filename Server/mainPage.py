@@ -1,19 +1,37 @@
 import sys
-#sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+from Server.Db import checkEvents, checkProfile
+
+
 
 
 class mainPage:
-
+    
     def getUser():
-        return "John Doe" #when we meet we need to discus this
-    def getPoints():
-        return "3000 points"
-    def getEvents():
-        return "Event 1 \nEvent 2\nEvent 3 \n"
+        from Server import serverMain
+        usr=serverMain.getloggedinUser()
+        profileData=checkProfile(serverMain.username)[0]
+        print(profileData)
+        if profileData:
+            USERNAME = profileData[0]
+            POINTS = profileData[4]
+            return 'User: '+str(USERNAME)+'\n'+'Number of Points: '+str(POINTS)+'\n'
+        else: return "User not Found"
 
+    def getEvents():
+        evntStr=""
+        eventData=checkEvents()
+        if eventData:
+            for event in eventData:
+                name=event[0]
+                cost=event[1]
+                evntStr+= name+" Cost per ticket: "+str(cost)+" points\n"
+            return evntStr
+        else: return "No events"    
+            
     def pageDisplay():    
-       return """\nWELCOME TO THE FLORAL PRIATES TICKET PAGE\n"""+'User: '+mainPage.getUser()+'\n'+'Number of Points: '+mainPage.getPoints()+'\n'+'UPCOMING EVENTS: '+mainPage.getEvents()+'\n'
+       return """\nWELCOME TO THE FLORAL PRIATES MainPage\n"""+mainPage.getUser()+mainPage.getEvents()
 
 if __name__ == "__main__":
-    mainPage.pageDisplay()
-
+    
+    print(mainPage.pageDisplay())

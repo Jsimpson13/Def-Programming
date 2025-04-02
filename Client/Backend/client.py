@@ -9,6 +9,7 @@ from Decrypt import Decrypt  # Import your Decrypt class
 from Encoding import Encoding
 from Server.loginPage import loginPage  # Import your Encoding function or class
 
+
 class DiffieHellmanClient:
     loggedin=False
     def __init__(self, host='127.0.0.1', port=12345):
@@ -74,7 +75,9 @@ class DiffieHellmanClient:
     def interactive_chat(self):
         """Allows the client to chat interactively with the server."""
         try:
-            while (loginPage.loggedin()==True):
+            client.loggin()
+            print("WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Exit\n")
+            while (True):
                 message = input("Client: ")
                 if message.lower() == "exit":
                     self.send_message("exit")
@@ -91,17 +94,17 @@ class DiffieHellmanClient:
         self.client_socket.close()
         print("Disconnected from server.")
 
-    """def loggin(self): 
-        user=input("Please Input Username: ")
-        while True: 
-            if (user=="John"):
-                #this needs to be changed to look through the user names of the db
-                psd=input("Please Input Password: ")
-                if (psd=="JohnDoe123"):
-                    self.loggedin=True
-                    break
-                else: print("Please put in valid input")"""
-        
+    def loggin(self): 
+        while(True):
+            choice=str(input("Login or Add User (Login or Add): ")).replace(" ", "").lower()
+            if choice=='login':
+                loginPage.loggedin()
+                break
+            elif choice=='add':
+                loginPage.addUser()
+                break
+            else: print("Please put a valid choice, Login or Add")
+            
 
 if __name__ == "__main__":
     client = DiffieHellmanClient()
