@@ -1,5 +1,8 @@
 import sys
-sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+import os
+#sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(project_root)
 import socket
 from cryptography.hazmat.primitives.asymmetric import dh
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF

@@ -1,5 +1,10 @@
 import sys
-sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+import os
+#sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+sys.path.append(project_root)
+print("This is your sys path: ", sys.path)
+print("This is your project root", project_root)
 import socket
 from cryptography.hazmat.primitives.asymmetric import dh
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
@@ -19,7 +24,8 @@ class DiffieHellmanClient:
         self.shared_key = None
 
     def connect(self):
-        """Connects to the server and initiates the key exchange."""
+        print("Thanks for connecting! TEST")
+        #Connects to the server and initiates the key exchange
         self.client_socket.connect((self.host, self.port))
         print(f"Connected to server at {self.host}:{self.port}")
 
@@ -27,16 +33,23 @@ class DiffieHellmanClient:
 
     def perform_key_exchange(self):
         """Handles the Diffie-Hellman key exchange with the server."""
+        print("PERFORMING KEY EXCHANGE")
         # Receive server parameters and public key
         server_parameters_bytes = self.client_socket.recv(2048)
+        print("SERVER PARAM BYTES", server_parameters_bytes)
         server_parameters = serialization.load_pem_parameters(server_parameters_bytes)
+        print("SERVER PARAM", server_parameters)
 
         server_public_bytes = self.client_socket.recv(2048)
+        print("SERVER PUBLIC BYTES", server_public_bytes)
         server_public_key = serialization.load_pem_public_key(server_public_bytes)
+        print("SERVER PUBLIC KEY", server_public_key)
 
         # Generate client private and public key
         client_private_key = server_parameters.generate_private_key()
+        print("CLIENT PRIVATE KEY", client_private_key)
         client_public_key = client_private_key.public_key()
+        print("CLIENT PUBLIC KEY", client_public_key)
 
         # Send client public key to server
         client_public_bytes = client_public_key.public_bytes(
@@ -73,10 +86,11 @@ class DiffieHellmanClient:
         return decrypted_message
 
     def interactive_chat(self):
-        """Allows the client to chat interactively with the server."""
+        #Allows the client to chat interactively with the server
+        print("BEGINNING OF INTERACTIVE CHAT")
         try:
-            client.loggin()
-            print("WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Exit\n")
+            client.login()
+            print("WELCOME TO THE FLORAL PIRATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Exit\n")
             while (True):
                 message = input("Client: ")
                 if message.lower() == "exit":
@@ -94,7 +108,7 @@ class DiffieHellmanClient:
         self.client_socket.close()
         print("Disconnected from server.")
 
-    def loggin(self): 
+    def login(self): 
         while(True):
             choice=str(input("Login or Add User (Login or Add): ")).replace(" ", "").lower()
             if choice=='login':
@@ -108,5 +122,7 @@ class DiffieHellmanClient:
 
 if __name__ == "__main__":
     client = DiffieHellmanClient()
+    print("Attempting to connect CLIENT.CONNECT")
     client.connect()
+    print("ENTERING INTERACTIVE CHAT")
     client.interactive_chat()

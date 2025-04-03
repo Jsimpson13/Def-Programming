@@ -1,5 +1,5 @@
-import sys
-sys.path.append('C:/Users/jsimp/OneDrive/Desktop/Def-Programming')
+#import sys
+#sys.path.append('C:/Users/jsimp/OneDrive/Desktop/Def-Programming')
 import tkinter as tk
 from PIL import Image, ImageTk
 from Client.GUI.newusr_UI import NewUserUI
