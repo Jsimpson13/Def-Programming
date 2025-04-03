@@ -16,8 +16,8 @@ def createDB():
         CREATE TABLE IF NOT EXISTS profile
         (uid INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL UNIQUE,
-        name TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        name TEXT NOT NULL,
         phone TEXT,
         points INTEGER NOT NULL)
         ''')
@@ -71,6 +71,7 @@ def addEvent(eventCost, eventName):
 def checkPoints(usrnm):
     conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
     cursor = conn.cursor()
+    retbal=[]
     try:
         cursor.execute('''
         SELECT points FROM profile WHERE username = ?''', (usrnm,))
@@ -179,6 +180,7 @@ def checkPurchases(usrnm):
 def checkProfile(usrnm):
     conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
     cursor = conn.cursor()
+    profiles=[]
     try:
         cursor.execute('''
         SELECT username, password, name, phone, points FROM profile WHERE username = ?''', (usrnm,))

@@ -8,7 +8,7 @@ from cryptography.hazmat.primitives import serialization
 from Decrypt import Decrypt  # Import your Decrypt class
 from Encoding import Encoding
 from Server.loginPage import loginPage  # Import your Encoding function or class
-
+from Server.pointsPage import pointsPage
 
 class DiffieHellmanClient:
     loggedin=False
@@ -58,9 +58,10 @@ class DiffieHellmanClient:
 
         print("Key exchange successful. Secure communication established.")
 
-    def send_message(self, message):
+    def send_message(self, message,usrNm):
         """Encrypts and sends a message to the server."""
-        encrypted_message = Encoding.Encrypt(message, int(self.shared_key.hex(), 16))
+        formatmsg=f"{usrNm}:{message}"
+        encrypted_message = Encoding.Encrypt(formatmsg, int(self.shared_key.hex(), 16))
         self.client_socket.sendall(encrypted_message.encode('utf-8'))
 
     def receive_message(self):
@@ -75,17 +76,21 @@ class DiffieHellmanClient:
     def interactive_chat(self):
         """Allows the client to chat interactively with the server."""
         try:
-            client.loggin()
-            print("WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Exit\n")
+            currUser=client.loggin()
+            print("WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Points\n[4]Exit\n")
             while (True):
-                message = input("Client: ")
-                if message.lower() == "exit":
-                    self.send_message("exit")
+                premessage = input("Client: ")
+                message= str(premessage).replace(" ","").lower()
+                if message == "exit" or message=="4":
+                    self.send_message("exit", currUser)
                     break
-
-                self.send_message(message)
-                response = self.receive_message()
-                print(f"Server: {response}")
+                if message=="points" or message=="3":
+                    pointsPage.pageDisplay(currUser)
+                    pointsPage.addPoints(currUser)
+                else:    
+                    self.send_message(message,currUser)
+                    response = self.receive_message()
+                    print(f"Server: {response}")
         finally:
             self.disconnect()
 
@@ -98,10 +103,13 @@ class DiffieHellmanClient:
         while(True):
             choice=str(input("Login or Add User (Login or Add): ")).replace(" ", "").lower()
             if choice=='login':
-                loginPage.loggedin()
+                user=loginPage.loggedin()
+                if (user==""):
+                    user=loginPage.addUser()
+                return user
                 break
             elif choice=='add':
-                loginPage.addUser()
+                return loginPage.addUser()
                 break
             else: print("Please put a valid choice, Login or Add")
             
