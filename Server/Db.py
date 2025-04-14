@@ -3,13 +3,18 @@
 #Feb 26 2025
 
 #SQLite import
+from pathlib import Path
 import sqlite3
+
+#Setting universal path to DB
+project_root = Path(__file__).resolve().parents[1]
+db_path = project_root / "database.db"
 
 #function for creating database tables
 #creates profile, purchase, and event tables
 def createDB():
 #creating cursor
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 #creating profile table 
     cursor.execute('''
@@ -44,7 +49,7 @@ def createDB():
 
 #add entry to profile table function
 def addProfile(profileUsername, profilePassword, profileName, profilePhone):
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     try:
         #user points default to 0
@@ -57,7 +62,7 @@ def addProfile(profileUsername, profilePassword, profileName, profilePhone):
 
 #add entry to event table function
 def addEvent(eventCost, eventName):
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     try:
         cursor.execute('''
@@ -69,7 +74,7 @@ def addEvent(eventCost, eventName):
 
 #point query function
 def checkPoints(usrnm):
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     retBal=[]
     try:
@@ -85,7 +90,7 @@ def checkPoints(usrnm):
 
 #point add function
 def addPoints(usrnm, newPoints):
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()    
     try:
         cursor.execute('''
@@ -97,7 +102,7 @@ def addPoints(usrnm, newPoints):
 
 #purchase ticket function
 def buyTickets(usrnm, evntNm):
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     print("Connected")
     #checking if user has enough points for tickets
@@ -155,7 +160,7 @@ def buyTickets(usrnm, evntNm):
 
 #query event function
 def checkEvents():
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     events=[]
     try:
@@ -170,7 +175,7 @@ def checkEvents():
 
 #query past transactions
 def checkPurchases(usrnm):
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     purchases = []
     try:
@@ -193,7 +198,7 @@ def checkPurchases(usrnm):
 
 #query profile function
 def checkProfile(usrnm):
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     profiles=[]
     try:
@@ -209,7 +214,7 @@ def checkProfile(usrnm):
 def editProfile(usrnm, chngType, chngVal):
     #all uppercase to correct formatting for input validation
     upChngType = chngType.upper()
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     try:
         if(upChngType == "USERNAME"):
@@ -235,7 +240,7 @@ def editProfile(usrnm, chngType, chngVal):
 #query login information function
 #returns True/False (only checking for valid login credentials)
 def checkLoginCreds(usrnm, psswd):
-    conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     profiles = []
     try:
