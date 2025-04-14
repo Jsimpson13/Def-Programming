@@ -1,6 +1,6 @@
 import sys
 sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
-from Server.Db import checkEvents, checkProfile
+from Server.Db import checkPurchases, checkProfile
 
 
 
@@ -23,9 +23,9 @@ class mainPage:
         return f'User: {USERNAME}\nNumber of Points: {POINTS}\n'
 
 
-    def getEvents():
+    def getEvents(currUser):
         evntStr=""
-        eventData=checkEvents()
+        eventData=checkPurchases(currUser)
         if eventData:
             for event in eventData:
                 name=event[0]
@@ -35,7 +35,7 @@ class mainPage:
         else: return "No events"    
             
     def pageDisplay(currUser):    
-       return """\nWELCOME TO THE FLORAL PRIATES MainPage\n"""+mainPage.getUser(currUser)+mainPage.getEvents()
+       return """\nWELCOME TO THE FLORAL PRIATES MainPage\n"""+mainPage.getUser(currUser)+mainPage.getEvents(currUser)
 
 if __name__ == "__main__":
     

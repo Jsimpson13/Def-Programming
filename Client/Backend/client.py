@@ -9,6 +9,7 @@ from Decrypt import Decrypt  # Import your Decrypt class
 from Encoding import Encoding
 from Server.loginPage import loginPage  # Import your Encoding function or class
 from Server.pointsPage import pointsPage
+from Server.events  import events
 
 class DiffieHellmanClient:
     loggedin=False
@@ -77,16 +78,18 @@ class DiffieHellmanClient:
         """Allows the client to chat interactively with the server."""
         try:
             currUser=client.loggin()
-            print("WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Points\n[4]Exit\n")
+            print("WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Points\n[4]Events\n[5]Exit\n")
             while (True):
                 premessage = input("Client: ")
                 message= str(premessage).replace(" ","").lower()
-                if message == "exit" or message=="4":
+                if message == "exit" or message=="5":
                     self.send_message("exit", currUser)
                     break
                 if message=="points" or message=="3":
                     pointsPage.pageDisplay(currUser)
                     pointsPage.addPoints(currUser)
+                elif message=="events" or message=="4":
+                    events.pageDisplay(currUser)
                 else:    
                     self.send_message(message,currUser)
                     response = self.receive_message()

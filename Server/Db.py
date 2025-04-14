@@ -71,7 +71,7 @@ def addEvent(eventCost, eventName):
 def checkPoints(usrnm):
     conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
     cursor = conn.cursor()
-    retbal=[]
+    retBal=[]
     try:
         cursor.execute('''
         SELECT points FROM profile WHERE username = ?''', (usrnm,))
@@ -99,8 +99,10 @@ def addPoints(usrnm, newPoints):
 def buyTickets(usrnm, evntNm):
     conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
     cursor = conn.cursor()
+    print("Connected")
     #checking if user has enough points for tickets
     currBal = checkPoints(usrnm)
+    print("Checked Points")
     #formatting from tuple to integer
     frmtCurrBal = currBal[0]
     #checking event price
@@ -123,6 +125,7 @@ def buyTickets(usrnm, evntNm):
             cursor.execute('''
             UPDATE profile SET points = points - ? WHERE username = ?''', (frmtCst, usrnm))
             conn.commit()
+            print("updated points")
             #getting uid for new purchase entry
             cursor.execute('''
             SELECT uid FROM profile WHERE username = ?''', (usrnm,))
@@ -130,17 +133,21 @@ def buyTickets(usrnm, evntNm):
             #formatting from array to tuple to integer
             uid = userID[0]
             frmtUID = uid[0]
+            print("get uid")
             #getting eid for new purchase entry
             cursor.execute('''
             SELECT eid FROM event WHERE name = ?''', (evntNm,))
             eventID = cursor.fetchall()
+            print("made new eid for purchase")
             #formatting from array to tuple to integer
             eid = eventID[0]
             frmtEID = eid[0]
             #creating a purchase table entry using the uid and eid
             cursor.execute('''
             INSERT INTO purchase (uid, eid) VALUES (?, ?)''', (frmtUID, frmtEID))
+            print("frmtUID: ", frmtUID,"\n frmtEID", frmtEID )
             conn.commit()
+            print("finished")
     except:
         print("Error: unable to make purchase (invalid user or event)")
     conn.close()
@@ -165,16 +172,24 @@ def checkEvents():
 def checkPurchases(usrnm):
     conn = sqlite3.connect("C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming\\database.db")
     cursor = conn.cursor()
+    purchases = []
     try:
         cursor.execute('''
-        SELECT name, cost FROM event WHERE eid = 
-        (SELECT eid FROM purchase WHERE uid = 
-        (SELECT uid FROM profile WHERE username = ?))''', (usrnm,))
-        purchases = cursor.fetchall()     
-    except:
-        print("Error: no purchases found")
-    conn.close()
+        SELECT event.name, event.cost 
+        FROM purchase
+        JOIN profile ON purchase.uid = profile.uid
+        JOIN event ON purchase.eid = event.eid
+        WHERE profile.username = ?''', (usrnm,))
+        
+        purchases = cursor.fetchall()
+        print(purchases, len(purchases))
+    except Exception as e:
+        print("Error retrieving purchases:", e)
+    finally:
+        conn.close()
+    
     return purchases
+
 
 #query profile function
 def checkProfile(usrnm):
@@ -253,7 +268,7 @@ if __name__ == "__main__":
     #balance is a tuple; this gets cleans up the formatting
     print("Point Balance: ", balance[0],"\n")
 #add points test
-    addPoints("Bob123", 250)
+    addPoints("Bob123", 1000)
     postAddBal = checkPoints("Bob123")
     print("Point Balance After Addition: ", postAddBal[0],"\n")
 #display events test
@@ -276,7 +291,9 @@ if __name__ == "__main__":
     for username, password, name, phone, points in updtdProf:
         print(username,"\t",password,"\t",name,"\t",phone,"\t",points)
 #purchase test (sufficient balance)
+    buyTickets("Bob123", "Oilers @ Canucks")
     buyTickets("Bob123", "Islanders @ Devils")
+    
     postBuyBalance = checkPoints("Bob123")
     print("\nPoints after Purchase: ", postBuyBalance[0])
 #purchase display test

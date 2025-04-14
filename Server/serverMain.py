@@ -3,6 +3,7 @@ import threading
 sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
 #from Client.GUI.login_UI import loginUI
 #from Client.GUI import mainGUI
+from Server.events import events
 from Server.mainPage import mainPage
 from Server.pointsPage import pointsPage
 from Server.server import DiffieHellmanServer
@@ -18,9 +19,12 @@ def process_message(message):
     print (f"Debug: Recieved request from user '{usrNm}' with command ''{command}") 
 
     process_messaged= str(command).replace(" ", "").lower()
-    if process_messaged=="exit" or process_messaged=="4":
+    if process_messaged=="exit" or process_messaged=="5":
         return exit_server()
     
+    if process_messaged=="events" or process_messaged=="4":
+         return events.pageDisplay(usrNm)
+
     if process_messaged=="Points" or process_messaged=="3":
          return pointsPage.pageDisplay(usrNm)
     
@@ -33,7 +37,7 @@ def process_message(message):
     else: return "no option"
 
 def menuDisplay():
-     return "WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Points\n[4]Exit\n"
+     return "WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Points\n[4]Events\n[5]Exit"
 
 def exit_server():
     return 
