@@ -1,6 +1,8 @@
+from pathlib import Path
 import sys
 import threading
-sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+project_root = Path(__file__).resolve().parents[1]
+sys.path.append(str(project_root))
 #from Client.GUI.login_UI import loginUI
 #from Client.GUI import mainGUI
 from Server.events import events

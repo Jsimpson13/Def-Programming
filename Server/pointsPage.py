@@ -1,5 +1,7 @@
+from pathlib import Path
 import sys
-sys.path.append('C:\\Users\\jsimp\\OneDrive\\Desktop\\Def-Programming')
+project_root = Path(__file__).resolve().parents[1]
+sys.path.append(str(project_root))
 from Server import Db
 
 class pointsPage:
