@@ -1,5 +1,5 @@
 ==================================================
-           Floral Pirates - User Manual
+         Floral Pirates - User Manual
 
 PREREQUISITES
 --------------------------------------------------
