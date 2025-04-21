@@ -1,5 +1,4 @@
-==================================================
-         Floral Pirates - User Manual
+# Floral Pirates - User Manual
 
 PREREQUISITES
 --------------------------------------------------
@@ -45,6 +44,4 @@ TROUBLESHOOTING
    IMPORTANT: This will delete all newly created user profiles and will reset the database to its original state
 
 --------------------------------------------------
-You're all set! Enjoy using Floral Pirates.
-==================================================
-
+# You're all set! Enjoy using Floral Pirates.
