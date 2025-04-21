@@ -1,3 +1,5 @@
+#Provides methods for encrypting a string using a key
+
 class Encoding:
     @staticmethod
     def Encrypt(s, key)->str:

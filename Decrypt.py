@@ -1,3 +1,5 @@
+#Provides methods for decrypting an encrypted string using a key
+
 class Decrypt:
     @staticmethod
     def DECS(encrypted_string,key):
