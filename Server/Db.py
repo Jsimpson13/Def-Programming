@@ -14,7 +14,7 @@ import sqlite3
 
 # Define a constant path to the database
 
-DB_PATH = "/home/seed/Desktop/Def-Programming/database.db"
+DB_PATH = "~/Desktop/Def-Programming/database.db"
 
 
 
