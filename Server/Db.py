@@ -1,11 +1,3 @@
-#Database for Def Prog Group Assignment
-
-#Judson Whiteside
-
-#Feb 26 2025
-
-
-
 #SQLite import
 
 import sqlite3
@@ -92,7 +84,7 @@ def addProfile(profileUsername, profilePassword, profileName, profilePhone):
 
         INSERT INTO profile (username, password, name, phone, points) VALUES (?, ?, ?, ?, ?)''', 
 
-        (profileUsername, profilePassword, profileName, profilePhone, 0))
+        (profileUsername, profilePassword, profileName, profilePhone, 1000))
 
         conn.commit()
 
