@@ -157,24 +157,23 @@ def checkPoints(usrnm):
 
 
 def addPoints(usrnm, newPoints):
+	points = int(newPoints)
+	
+	conn = sqlite3.connect(DB_PATH)
 
-    conn = sqlite3.connect(DB_PATH)
+	cursor = conn.cursor()    
 
-    cursor = conn.cursor()    
+	try:
 
-    try:
+		cursor.execute('''UPDATE profile SET points = points + ? WHERE username = ?''', (points, usrnm))
 
-        cursor.execute('''
+		conn.commit()
 
-        UPDATE profile SET points = points + ? WHERE username = ?''', (newPoints, usrnm))
+	except:
 
-        conn.commit()
+		print("Error: user does not exist")
 
-    except:
-
-        print("Error: user does not exist")
-
-    conn.close()
+	conn.close()
 
 
 
@@ -256,7 +255,7 @@ def buyTickets(usrnm, evntNm):
 
             INSERT INTO purchase (uid, eid) VALUES (?, ?)''', (frmtUID, frmtEID))
 
-            print("frmtUID: ", frmtUID, "\n frmtEID", frmtEID)
+            # print("frmtUID: ", frmtUID, "\n frmtEID", frmtEID)
 
             conn.commit()
 

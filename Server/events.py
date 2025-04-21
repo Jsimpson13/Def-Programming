@@ -17,7 +17,8 @@ from Server import Db
 class events: 
 
 
-
+# Retrieves event names and ticket costs from the database
+# Formats them into a string
     def getEvents():
 
         evntStr=""
@@ -41,7 +42,7 @@ class events:
     
 
     
-
+# Prompts user to buy a ticket and processes the purchase through the database
     def buyEvnt(currUser):
 
         choice=str(input("Do you want to buy a ticket: ")).replace(" ","").lower()
@@ -49,8 +50,6 @@ class events:
         if choice=="n" or choice=="no":
 
             print("ok thank you")
-
-            print("WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Points\n[4]Events\n[5]Exit")
 
         if choice=="y"or choice=="yes":
 
@@ -77,7 +76,7 @@ class events:
 
 
 
-
+# Displays the list of events and prompts the user to buy a ticket
     def pageDisplay(currUser):
 
         print( events.getEvents())

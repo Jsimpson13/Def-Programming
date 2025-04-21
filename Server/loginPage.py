@@ -1,3 +1,7 @@
+# Handles user authentication and registration
+# Allows users to log in, verifying credentials through the database
+# Provides functionality for adding new users
+
 import getpass
 
 import sys
@@ -14,6 +18,7 @@ from Server import Db, serverMain
 
 class loginPage:
 
+# Prompts the user to login in, checks credentials, limits failed attempts
     def loggedin(max_attempts=5):
 
         attempts = 0
@@ -59,7 +64,7 @@ class loginPage:
         return ""
 
 
-
+# Prompts for new user details and adds them to the database
     def addUser():
 
         usr=input("Enter Username: ")

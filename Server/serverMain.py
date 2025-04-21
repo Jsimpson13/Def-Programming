@@ -1,3 +1,6 @@
+# Starts and manages the Diffie-Hellman server
+# Routes client requests to appropriate handlers
+
 import sys
 
 import threading
@@ -5,10 +8,6 @@ import threading
 import os
 
 sys.path.append(os.path.expanduser('~/Desktop/Def-Programming'))
-
-#from Client.GUI.login_UI import loginUI
-
-#from Client.GUI import mainGUI
 
 from Server.events import events
 
@@ -18,10 +17,7 @@ from Server.pointsPage import pointsPage
 
 from Server.server import DiffieHellmanServer
 
-#from server import DiffieHellmanServer
-
-
-
+# Handles incoming messages and calls corresponding functions
 def process_message(message):
 
     """Handles incoming messages and calls corresponding functions.""" 
@@ -75,19 +71,19 @@ def process_message(message):
     else: return "no option"
 
 
-
+# Returns the string of menu options
 def menuDisplay():
 
-     return "WELCOME TO THE FLORAL PRIATES\n"+" Options: \n[1]Menu\n[2]Main\n[3]Points\n[4]Events\n[5]Exit"
+     return "Menu"
 
 
-
+# Stub for server shutdown logic
 def exit_server():
 
     return 
 
 
-
+# Returns server health status
 def server_status():
 
     """Returns server status."""
@@ -95,7 +91,7 @@ def server_status():
     return "Server is running and healthy."
 
 
-
+# Starts the server and begins handling messages
 def mainServer():
 
     """Starts the server and forwards messages to `process_message`."""

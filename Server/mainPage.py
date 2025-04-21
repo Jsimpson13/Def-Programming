@@ -1,3 +1,6 @@
+# Displays the main user page
+# Shows profile information and any events the usre has purchased tickets for
+
 import sys
 
 import os
@@ -14,8 +17,8 @@ from Server.Db import checkPurchases, checkProfile
 
 class mainPage:
 
-    
 
+# Retrieves and formats user profile data for display
     def getUser(currUser):
 
         print(f"Debug: Current user -> {currUser}")  # Print for debugging
@@ -49,7 +52,7 @@ class mainPage:
 
 
 
-
+# Retrieves and formats list of purchased event tickets
     def getEvents(currUser):
 
         evntStr=""
@@ -71,10 +74,10 @@ class mainPage:
         else: return "No events"    
 
             
-
+# Combines user profile and event data in a single main page display
     def pageDisplay(currUser):    
 
-       return """\nWELCOME TO THE FLORAL PRIATES MainPage\n"""+mainPage.getUser(currUser)+mainPage.getEvents(currUser)
+       return """\nWELCOME TO THE FLORAL PIRATES MAIN PAGE\n"""+mainPage.getUser(currUser)+mainPage.getEvents(currUser)
 
 
 

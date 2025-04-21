@@ -1,3 +1,7 @@
+# Handles points system for users
+# Viewing and adding points
+
+
 import sys
 
 import os
@@ -12,10 +16,7 @@ from Server import Db
 
 class pointsPage:
 
-
-
-    #View Points
-
+    #Retrieves current user's points from the database
     def viewPoints(currUser):
 
         retpoints= Db.checkPoints(currUser)
@@ -32,32 +33,27 @@ class pointsPage:
 
     
 
-    #Add Points
-
+    #Adds a user-specified number of points to the current user's profile
     def addPoints(currUser):
 
         while(True):
 
                 addpoint=input("Enter the amount of points you want to add: ")
 
-                if addpoint.isdigit():
+                Db.addPoints(currUser, addpoint)
 
-                     Db.addPoints(currUser, addpoint)
+                return (addpoint + " points added!\n")
 
-                     return(addpoint+" points added!")
 
-                     break
+                break
 
-                else:
-
-                    return("Please enter a whole number or 0")
-
-    # return a displayable 
+                return("Please enter a whole number or 0")
+        print("\nWELCOME TO THE FLORAL PIRATES\nOptions:") 
 
 
 
 
-
+    # Displays the user's current points
     def pageDisplay(currUser):
 
         print("Floral Pirates Hockey\n      POINTS PAGE")
