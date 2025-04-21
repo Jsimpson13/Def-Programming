@@ -10,13 +10,11 @@
 
 import sqlite3
 
+from pathlib import Path
 
+# Define a relative path to the database
 
-# Define a constant path to the database
-
-DB_PATH = "~/Desktop/Def-Programming/database.db"
-
-
+DB_PATH = Path("~/Desktop/Def-Programming/database.db").expanduser()
 
 # Function for creating database tables
 
